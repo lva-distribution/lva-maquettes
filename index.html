@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Saisie de commande — proposition LVA</title>
+<style>
+:root{--rouge:#b3203a;--rouge-c:#fbe9ec;--encre:#1d2330;--gris:#5d6577;--trait:#e3e6ec;--fond:#eef0f4;--vert:#1f8a4c;--vert-c:#e9f7ee;--bleu:#2557b8;--bleu-c:#e8effc}
+*{box-sizing:border-box}
+body{margin:0;background:var(--fond);color:var(--encre);font:15.5px/1.6 "Segoe UI",system-ui,-apple-system,sans-serif}
+main{max-width:860px;margin:0 auto;padding:40px 16px 60px}
+.sur{font-size:12px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--rouge)}
+h1{font-size:30px;line-height:1.2;margin:6px 0 14px}
+h2{font-size:19px;margin:36px 0 10px}
+p{margin:0 0 12px}
+.carte{background:#fff;border:1px solid var(--trait);border-radius:14px;padding:20px 22px}
+.cta{display:inline-flex;align-items:center;gap:8px;background:var(--rouge);color:#fff;text-decoration:none;font-weight:700;padding:11px 18px;border-radius:10px;margin:6px 10px 6px 0}
+.cta.s{background:#fff;color:var(--encre);border:1px solid var(--trait)}
+.apercu{display:block;width:100%;border-radius:12px;border:1px solid var(--trait);box-shadow:0 10px 30px rgba(20,25,40,.12);margin:18px 0 4px}
+.legende{font-size:12.5px;color:var(--gris);text-align:center}
+ol.pts{list-style:none;padding:0;margin:0;counter-reset:p;display:grid;gap:10px}
+ol.pts li{counter-increment:p;background:#fff;border:1px solid var(--trait);border-radius:12px;padding:14px 16px 14px 54px;position:relative}
+ol.pts li::before{content:counter(p);position:absolute;left:16px;top:14px;width:26px;height:26px;border-radius:8px;background:var(--rouge-c);color:var(--rouge);font-weight:800;display:grid;place-items:center;font-size:13px}
+ol.pts b{display:block;margin-bottom:2px}
+ol.pts .pq{display:block;font-size:13.5px;color:var(--gris);margin-top:4px}
+.kbd{display:inline-block;border:1px solid #c8cdd8;border-bottom-width:2px;border-radius:5px;padding:0 5px;font-size:12px;font-weight:600;background:#fff}
+.note{font-size:13.5px;color:var(--gris)}
+footer{margin-top:40px;font-size:13px;color:var(--gris)}
+</style>
+</head>
+<body>
+<main>
+  <div class="sur">Hélios Cloud · saisie de commande</div>
+  <h1>La saisie de commande telle que nous aimerions l'utiliser</h1>
+
+  <div class="carte">
+    <p>Merci pour la présentation de la nouvelle saisie de commande et pour la page d'essai. Chez LVA Distribution, c'est l'écran
+    sur lequel nous passons le plus de temps : la télévente y saisit des dizaines de commandes par jour, souvent au téléphone avec le client.
+    Chaque clic et chaque centimètre d'écran comptent.</p>
+    <p>Plutôt que de vous envoyer une liste de remarques, nous avons construit une <b>maquette qui fonctionne</b>, sur de vrais articles
+    LVA (photos, unités, colisages) et un client fictif. Elle ne retire rien de ce qu'Hélios sait faire : elle montre comment nous aimerions
+    l'avoir sous les yeux.</p>
+    <a class="cta" href="saisie-b/">Ouvrir la maquette →</a>
+    <a class="cta s" href="https://github.com/lva-distribution/lva-maquettes">Le code source</a>
+  </div>
+
+  <a href="saisie-b/"><img class="apercu" src="apercu.jpg" alt="Aperçu de la maquette de saisie de commande : bandeau client, barre de recherche, cadencier par familles, volet commande"></a>
+  <div class="legende">La maquette : client à gauche, cadencier au centre, commande à droite. Tout est cliquable.</div>
+
+  <h2>Ce qui compte pour nous</h2>
+  <ol class="pts">
+    <li><b>Une ligne = un article, lisible d'un coup d'œil.</b>Pas de rangée de boutons sur chaque ligne. Les <b style="display:inline">− / +</b> apparaissent au survol de la case quantité, et la quantité reste visible au milieu.
+      <span class="pq">Dans la proposition du 10/11, chaque ligne porte une dizaine d'icônes et des + / − permanents : l'œil ne sait plus où se poser.</span></li>
+    <li><b>Le prix tient dans une seule case.</b>Prix net en gras, tarif barré à côté, remise en pastille. Un clic ouvre une bulle : remise en % ou prix net, et « remettre le prix ».
+      <span class="pq">Cinq champs par ligne (prix brut, remise, unité, prix net, marge) prennent la moitié de la largeur pour une information qu'on modifie rarement.</span></li>
+    <li><b>La nature du tarif en pastille : TG, CP, TS.</b>On voit tout de suite si le prix vient de la grille, d'un accord client ou d'une saisie à la main (en orange).</li>
+    <li><b>Des couleurs douces.</b>La ligne passe en vert pastel quand une quantité est saisie, une ligne sur deux est légèrement teintée, et le rouge est réservé aux alertes.
+      <span class="pq">Un vert vif sur toute la ligne fatigue sur une journée de saisie et noie les vraies alertes.</span></li>
+    <li><b>L'historique en vignettes, avec une alerte utile.</b>Les 5 dernières semaines, la plus récente à gauche. Quand un article n'a pas été repris depuis 5 semaines, sa vignette pulse doucement : le télévendeur pense à le proposer.</li>
+    <li><b>Le colisage se choisit sur la ligne.</b>Pièce, colis ou kilo dans une liste, avec l'équivalence affichée en dessous (« 1 colis = 3,84 kg env. »). Au clavier : <span class="kbd">2c</span> = 2 colis, <span class="kbd">3p</span> = 3 pièces.</li>
+    <li><b>Le clavier d'abord.</b>Deux barres de recherche : <span class="kbd">F2</span> dans les articles du client, <span class="kbd">F3</span> dans tout le catalogue. <span class="kbd">Entrée</span> va à la quantité, une case vide + <span class="kbd">Entrée</span> reprend la quantité habituelle, les flèches changent de ligne.</li>
+    <li><b>De la place quand on en a besoin.</b>Chaque famille se replie d'un clic (son titre garde le nombre d'articles, ceux commandés et les alertes), et les volets client et commande se replient sur le côté.</li>
+    <li><b>Un bandeau qui sert.</b>Le nom du client ouvre ses livraisons, ses factures et ses tournées. La date de livraison ouvre un calendrier qui montre ses jours de tournée. Devis ou commande se choisit d'un clic.</li>
+    <li><b>Le devis avec remises à la chaîne.</b>En mode devis, une colonne « Remise % » apparaît : on tape, <span class="kbd">Entrée</span> passe à la ligne suivante, et un bouton enregistre toutes les remises d'un coup. Une remise qui remonterait le prix du client est signalée.</li>
+  </ol>
+
+  <h2>Le code</h2>
+  <div class="carte">
+    <p>La maquette tient dans <b>une seule page HTML</b>, sans bibliothèque ni serveur : les données sont en tête du fichier, puis le dessin,
+    le clavier et chaque fonction, commentés en français. <b>Vous pouvez reprendre librement le code et les idées pour Hélios</b> :
+    c'est le but.</p>
+    <p class="note">Ce n'est pas un produit : rien n'est branché à Hélios et rien n'est envoyé. Le client, les prix, les historiques, les livraisons
+    et les factures sont inventés ; les articles et leurs photos sont ceux de LVA.</p>
+  </div>
+
+  <footer>LVA Distribution · ZA Les Vieilles Vignes, 46500 Rignac · novembre 2026</footer>
+</main>
+</body>
+</html>
