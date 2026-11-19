@@ -38,11 +38,12 @@ footer{margin-top:40px;font-size:13px;color:var(--gris)}
     <p>Merci pour la présentation de la nouvelle saisie de commande et pour la page d'essai. Chez LVA Distribution, c'est l'écran
     sur lequel nous passons le plus de temps : la télévente y saisit des dizaines de commandes par jour, souvent au téléphone avec le client.
     Chaque clic et chaque centimètre d'écran comptent.</p>
-    <p>Plutôt que de vous envoyer une liste de remarques, nous avons construit une <b>maquette qui fonctionne</b>, sur de vrais articles
-    LVA (photos, unités, colisages) et un client fictif. Elle ne retire rien de ce qu'Hélios sait faire : elle montre comment nous aimerions
-    l'avoir sous les yeux.</p>
+    <p>Plutôt que de vous envoyer une liste de remarques, nous avons monté une <b>ébauche qui fonctionne</b>, sur de vrais articles
+    LVA (photos, unités, colisages) et un client fictif. Ce n'est pas un logiciel : c'est notre façon de vous montrer, en le faisant
+    marcher, comment ceux qui saisissent toute la journée aimeraient travailler. Vous connaissez Hélios ; nous connaissons la saisie
+    au quotidien, et c'est ce regard-là que nous voulons vous apporter.</p>
     <a class="cta" href="saisie-b/">Ouvrir la maquette →</a>
-    <a class="cta s" href="https://github.com/lva-distribution/lva-maquettes">Le code source</a>
+    <a class="cta s" href="https://github.com/lva-distribution/lva-maquettes">Le code, pour vos développeurs</a>
   </div>
 
   <a href="saisie-b/"><img class="apercu" src="apercu.jpg" alt="Aperçu de la maquette de saisie de commande : bandeau client, barre de recherche, cadencier par familles, volet commande"></a>
@@ -65,13 +66,30 @@ footer{margin-top:40px;font-size:13px;color:var(--gris)}
     <li><b>Le devis avec remises à la chaîne.</b>En mode devis, une colonne « Remise % » apparaît : on tape, <span class="kbd">Entrée</span> passe à la ligne suivante, et un bouton enregistre toutes les remises d'un coup. Une remise qui remonterait le prix du client est signalée.</li>
   </ol>
 
-  <h2>Le code</h2>
+  <h2>Une ébauche, pas un produit fini</h2>
   <div class="carte">
-    <p>La maquette tient dans <b>une seule page HTML</b>, sans bibliothèque ni serveur : les données sont en tête du fichier, puis le dessin,
-    le clavier et chaque fonction, commentés en français. <b>Vous pouvez reprendre librement le code et les idées pour Hélios</b> :
-    c'est le but.</p>
-    <p class="note">Ce n'est pas un produit : rien n'est branché à Hélios et rien n'est envoyé. Le client, les prix, les historiques, les livraisons
-    et les factures sont inventés ; les articles et leurs photos sont ceux de LVA.</p>
+    <p>Nous savons qu'il manque beaucoup de choses. Nous avons volontairement laissé de côté une partie de ce qu'Hélios fait déjà
+    ou de ce que votre proposition prévoit, pour nous concentrer sur la façon de travailler :</p>
+    <ul>
+      <li>l'enregistrement réel de la commande dans Hélios, la facturation et le récapitulatif de préparation ;</li>
+      <li>les promotions, ventes flash, nouveautés, la mercuriale et les articles cachés ;</li>
+      <li>les accords et les règles de prix complètes, la marge et les droits de chacun sur les remises ;</li>
+      <li>les points à corriger avant validation, l'impression du cadencier, les commentaires de ligne, les articles de remplacement en cas de rupture.</li>
+    </ul>
+    <p>Tout cela a sa place dans l'écran final. Ce que nous voulons montrer ici, c'est l'esprit : peu de choses à l'écran, ce qui sert au bon moment,
+    et la saisie au clavier sans quitter la ligne.</p>
+  </div>
+
+  <h2>Ce que nous vous proposons</h2>
+  <div class="carte">
+    <p>Avant d'aller plus loin de notre côté, une question simple : <b>êtes-vous prêts à construire cet écran avec nous ?</b>
+    Concrètement : un échange avec l'équipe qui a fait la proposition du 10/11, des essais de vos versions par nos télévendeurs avant leur sortie,
+    et des retours précis, écran par écran.</p>
+    <p>Le code de la maquette est en accès libre : une seule page, sans bibliothèque, commentée en français. Il ne remplace pas votre travail ;
+    il sert de <b>cahier des charges qu'on peut cliquer</b>. Vos développeurs peuvent y voir exactement le comportement attendu
+    (le survol, les touches, les couleurs) et en reprendre ce qui leur est utile.</p>
+    <p class="note">Rien n'est branché à Hélios et rien n'est envoyé. Le client, les prix, les historiques, les livraisons et les factures sont inventés ;
+    les articles et leurs photos sont ceux de LVA.</p>
   </div>
 
   <footer>LVA Distribution · ZA Les Vieilles Vignes, 46500 Rignac · novembre 2026</footer>

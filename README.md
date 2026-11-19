@@ -5,7 +5,7 @@ Proposition d'ergonomie pour l'écran de saisie de commande client d'Hélios Clo
 - Note d'introduction : <https://lva-distribution.github.io/lva-maquettes/>
 - Maquette : <https://lva-distribution.github.io/lva-maquettes/saisie-b/>
 
-Le code et les idées peuvent être repris librement pour Hélios.
+Une ébauche, pas un logiciel : elle sert de cahier des charges qu’on peut cliquer. Le code et les idées peuvent être repris librement pour Hélios.
 
 ## Contenu
 
