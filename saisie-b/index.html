@@ -149,6 +149,7 @@ tr.pris td:first-child{box-shadow:inset 3px 0 0 var(--vert)}
 .zoom img{flex:1;min-height:0;width:100%;object-fit:contain}
 .zoom div{font-size:11px;color:var(--gris);text-align:center;padding-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .des{font-weight:600}
+.mq{display:inline-block;font-size:10px;font-weight:800;letter-spacing:.4px;color:#7a5418;background:#f7eedd;border:1px solid #ecdcbc;border-radius:4px;padding:0 5px;margin-right:6px;vertical-align:1px;white-space:nowrap}
 .code{font-family:Consolas,monospace;color:var(--gris);font-size:11.5px}
 .histo{display:flex;gap:3px}
 .sem-sens{font-size:10px;font-weight:500;letter-spacing:0;text-transform:none;color:#9aa1ae}
@@ -306,9 +307,11 @@ const nombre = (s) => { const t = String(s || '').replace(/[\s €%]/g, '').rep
 const esc = (s) => String(s == null ? '' : s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 const norm = (s) => String(s || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toUpperCase();
 
+// Marque de l'article (champ Marques de la fiche Hélios) ; absente quand Hélios n'en a pas.
+const MARQUES = {"4093": "ROUGIÉ", "4378": "ROUGIÉ", "3226": "ROUGIÉ", "5176": "ROUGIÉ", "4867": "ROUGIÉ", "10782": "AUGUSTA", "1547": "ROUGIÉ", "8692": "CONVIVIAL", "9742": "EASY MEAT", "2375": "LDC", "6907": "JACQUET", "3432": "ISIGNY", "4291": "CAMPAGNETTE", "9064": "DOMAINE DE MORDESSON", "6467": "GRANAROLO", "8285": "DUROUX", "3597": "ONETIK", "4286": "GRAND FERMAGE", "1232": "BAIGNES", "1229": "BAIGNES", "9300": "GID", "7536": "GID", "8758": "GID", "2067": "MUTTI", "3648": "JYRELA", "316": "LEE KUM KEE", "10559": "LA PULPE", "5932": "ANDROS CHEF", "11474": "FABRIQUE DE JEAN", "11611": "OREO", "10462": "BINDI", "10463": "BINDI", "8569": "SAR OCEAN", "10692": "C PROPRE"};
 const lignes = A.map(([groupe, emo, code, des, uv, utv, grille, net, remAccord, sem, hq, hca, stock, us, cond]) =>
   ({ groupe, emo, code, des, uv, utv, grille, net0: net, net, nature: grille === net ? 'TG' : 'CP',
-    remAccord, sem, cond, ci: 0, stock, us, qte: 0, main: false }));
+    remAccord, sem, cond, ci: 0, stock, us, qte: 0, main: false, marque: MARQUES[code] || '' }));
 const facteur = (l) => l.cond[l.ci][1];
 const unite = (l) => l.cond[l.ci][0];
 const auPoids = (l) => l.utv === 'Kg' && !(facteur(l) === 1 && unite(l) === l.utv);
@@ -320,7 +323,7 @@ const remisePct = (l) => l.grille && l.net != null ? Math.round((1 - l.net / l.g
 function score(l, req) {
   const mots = norm(req).split(/[^A-Z0-9]+/).filter(Boolean);
   if (!mots.length) return 1;
-  const ml = norm(l.des).split(/[^A-Z0-9]+/).filter(Boolean);
+  const ml = norm(l.des + ' ' + (l.marque || '')).split(/[^A-Z0-9]+/).filter(Boolean);
   let s = 0;
   for (const m of mots) {
     if (/^\d+$/.test(m) && l.code.startsWith(m.replace(/^0+/, ''))) { s += 5; continue; }
@@ -411,7 +414,7 @@ function ligneHtml(l, i, alt) {
   const nat = l.main ? 'TS' : l.nature;
   return `<tr data-act="ligne" data-code="${l.code}" class="${i === etat.sel ? 'sel ' : ''}${alt ? 'alt ' : ''}${l.qte ? 'pris' : ''}">
     <td>${PHOTOS.has(l.code) ? `<div class="mini ph" data-photo="${l.code}"><img src="photos/${l.code}.jpg" alt="" loading="lazy"></div>` : `<div class="mini">${l.emo}</div>`}</td>
-    <td><div class="des">${esc(l.des)}</div><div class="code">${l.code.padStart(9, '0')}</div></td>
+    <td><div class="des">${l.marque ? `<span class="mq" title="Marque">${esc(l.marque)}</span>` : ''}${esc(l.des)}</div><div class="code">${l.code.padStart(9, '0')}</div></td>
     <td>${celluleHisto(l)}</td>
     <td class="stk ${stockCl}">${l.stock == null ? '<span class="det">dans Hélios</span>' : l.stock <= 0 ? 'rupture' : qfr(l.stock) + ' <span class="det">' + esc(l.us) + '</span>'}</td>
     <td><span class="qbox"><button class="pm m" data-act="pm" data-d="-1" data-code="${l.code}" tabindex="-1" title="Un de moins">−</button><input class="qte" data-code="${l.code}" value="${l.qte ? qfr(l.qte) : ''}" ${!l.qte && sug && l.ci === 0 ? `placeholder="${qfr(sug)} ?"` : ''}><button class="pm p" data-act="pm" data-d="1" data-code="${l.code}" tabindex="-1" title="Un de plus">+</button></span>${sel}${equiv ? `<div class="det">${equiv}</div>` : ''}</td>
@@ -945,7 +948,7 @@ document.addEventListener('mouseover', (e) => {
   if (!m) return;
   const l = lignes.find((x) => x.code === m.dataset.photo);
   zoom.querySelector('img').src = 'photos/' + m.dataset.photo + '.jpg';
-  zoom.querySelector('div').textContent = l ? l.des : '';
+  zoom.querySelector('div').textContent = l ? (l.marque ? l.marque + ' · ' : '') + l.des : '';
   zoom.hidden = false;
   placerZoom(e);
 });
