@@ -149,7 +149,7 @@ tr.pris td:first-child{box-shadow:inset 3px 0 0 var(--vert)}
 .zoom img{flex:1;min-height:0;width:100%;object-fit:contain}
 .zoom div{font-size:11px;color:var(--gris);text-align:center;padding-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .des{font-weight:600}
-.mq{display:inline-block;font-size:10px;font-weight:800;letter-spacing:.4px;color:#7a5418;background:#f7eedd;border:1px solid #ecdcbc;border-radius:4px;padding:0 5px;margin-right:6px;vertical-align:1px;white-space:nowrap}
+.mq{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.4px;color:var(--gris);background:#f1f2f5;border:1px solid var(--trait);border-radius:4px;padding:0 5px;margin-left:6px;vertical-align:1px;white-space:nowrap}
 .code{font-family:Consolas,monospace;color:var(--gris);font-size:11.5px}
 .histo{display:flex;gap:3px}
 .sem-sens{font-size:10px;font-weight:500;letter-spacing:0;text-transform:none;color:#9aa1ae}
@@ -414,7 +414,7 @@ function ligneHtml(l, i, alt) {
   const nat = l.main ? 'TS' : l.nature;
   return `<tr data-act="ligne" data-code="${l.code}" class="${i === etat.sel ? 'sel ' : ''}${alt ? 'alt ' : ''}${l.qte ? 'pris' : ''}">
     <td>${PHOTOS.has(l.code) ? `<div class="mini ph" data-photo="${l.code}"><img src="photos/${l.code}.jpg" alt="" loading="lazy"></div>` : `<div class="mini">${l.emo}</div>`}</td>
-    <td><div class="des">${l.marque ? `<span class="mq" title="Marque">${esc(l.marque)}</span>` : ''}${esc(l.des)}</div><div class="code">${l.code.padStart(9, '0')}</div></td>
+    <td><div class="des">${esc(l.des)}${l.marque ? `<span class="mq" title="Marque">${esc(l.marque)}</span>` : ''}</div><div class="code">${l.code.padStart(9, '0')}</div></td>
     <td>${celluleHisto(l)}</td>
     <td class="stk ${stockCl}">${l.stock == null ? '<span class="det">dans Hélios</span>' : l.stock <= 0 ? 'rupture' : qfr(l.stock) + ' <span class="det">' + esc(l.us) + '</span>'}</td>
     <td><span class="qbox"><button class="pm m" data-act="pm" data-d="-1" data-code="${l.code}" tabindex="-1" title="Un de moins">−</button><input class="qte" data-code="${l.code}" value="${l.qte ? qfr(l.qte) : ''}" ${!l.qte && sug && l.ci === 0 ? `placeholder="${qfr(sug)} ?"` : ''}><button class="pm p" data-act="pm" data-d="1" data-code="${l.code}" tabindex="-1" title="Un de plus">+</button></span>${sel}${equiv ? `<div class="det">${equiv}</div>` : ''}</td>
@@ -948,7 +948,7 @@ document.addEventListener('mouseover', (e) => {
   if (!m) return;
   const l = lignes.find((x) => x.code === m.dataset.photo);
   zoom.querySelector('img').src = 'photos/' + m.dataset.photo + '.jpg';
-  zoom.querySelector('div').textContent = l ? (l.marque ? l.marque + ' · ' : '') + l.des : '';
+  zoom.querySelector('div').textContent = l ? l.des + (l.marque ? ' · ' + l.marque : '') : '';
   zoom.hidden = false;
   placerZoom(e);
 });
